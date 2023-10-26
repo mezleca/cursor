@@ -3,6 +3,8 @@ const active_mouses = new Map();
 
 let myID = undefined;
 
+const nomes = ['cleide', 'carlos', 'carlos1', 'carlos2', 'robert0', 'antunes', 'elter', 'eduardo'];
+
 socket.on("id", (e) => myID = e);
 
 socket.on("mouses", (data) => { // evento de novo cursor / inicializacao
@@ -21,12 +23,21 @@ socket.on("mouses", (data) => { // evento de novo cursor / inicializacao
             return;
         }
 
+        const cursor_div = document.createElement("div");
         const cursor = document.createElement("img");
+        const p = document.createElement("p");
 
-        cursor.setAttribute("id", `a_${k}`);
         cursor.src = "./imgs/cursor.png";
 
-        document.body.appendChild(cursor);
+        p.style = "color: white; font-size: 16px;"
+        p.innerText = nomes[Math.floor(Math.random() * nomes.length)];
+
+        cursor_div.setAttribute("id", `a_${k}`);
+
+        cursor_div.appendChild(p);
+        cursor_div.appendChild(cursor);
+
+        document.body.appendChild(cursor_div);
 
         active_mouses.set(k, v);
     });
