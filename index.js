@@ -35,6 +35,10 @@ io.on("connection", (socket) => {
         io.to("elter").emit("data", { id: socket.id, pos: active_mouses.get(socket.id) });
     });
 
+    socket.on("canvas", (data) => {
+        io.to("elter").emit("draw", {x: data.x, y: data.y});
+    });
+
     socket.on("disconnect", () => {
         active_mouses.delete(socket.id);
         io.to("elter").emit("delete", socket.id);

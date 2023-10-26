@@ -7,3 +7,12 @@ html, body {
     overflow-y: hidden;
     overflow-x: hidden;
 }
+
+canvas {
+    position: fixed;
+    z-index: 0;
+}
+
+div {
+    z-index: 1;
+}
