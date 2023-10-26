@@ -7,8 +7,8 @@ const nomes = ['cleide', 'carlos', 'carlos1', 'carlos2', 'robert0', 'antunes', '
 
 socket.on("id", (e) => myID = e);
 
-socket.on("mouses", (data) => { // evento de novo cursor / inicializacao
-   /** @type { Map } */
+socket.on("mouses", (data) => {
+   
     const array_mouses = data;
     const mouses = new Map();
 
@@ -43,7 +43,8 @@ socket.on("mouses", (data) => { // evento de novo cursor / inicializacao
     });
 });
 
-socket.on("data", (data) => { // evento e emitido quando ha uma alteracao no active_mouses
+socket.on("data", (data) => {
+   
     active_mouses.set(data.id, { x: data.pos.x, y: data.pos.y });
 
     active_mouses.forEach((v, k) => {
@@ -58,14 +59,15 @@ socket.on("data", (data) => { // evento e emitido quando ha uma alteracao no act
     })
 });
 
-socket.on("delete", (id) => { // remove cursor que esta offline
+socket.on("delete", (id) => {
+   
     active_mouses.delete(id);
     document.body.removeChild(document.querySelector(`#a_${id}`));
 });
 
 const updateInfo = (event) => {
 
-    socket.emit("moving", { // evento que no servidor e usado para atualizar as variaveis x e y, depois que as variaveis forem atualizadas ele emite um outro evento com o nome "data"
+    socket.emit("moving", {
         x: event.clientX,
         y: event.clientY
     });
